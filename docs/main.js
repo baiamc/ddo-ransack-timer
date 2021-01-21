@@ -4,10 +4,11 @@ var characters,quests,completions;
 
 function initialize() {
   loadData();
+  $(".select2").select2();
 }
 
 function update() {
-  
+
 }
 
 
