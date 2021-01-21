@@ -1,6 +1,6 @@
 "use strict";
 
-var characters,quests,completions,$characters,$quests,$timers;
+var characters,quests,completions,$characters,$quests,$timers,completionsTemplate;
 
 var sevenDays = 1000 * 60 * 60 * 24 * 7; // miliseconds in 7 days
 
@@ -15,7 +15,7 @@ function initialize() {
   $characters = $("#Characters");
   $quests = $("#Quests");
   $timers = $("#Timers tbody");
-  completionsTemplate = Handlebars.compile($("#CompletionTemplate").html())
+  completionsTemplate = Handlebars.compile($("#CompletionTemplate").html());
 }
 
 function update() {
