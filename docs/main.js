@@ -67,7 +67,7 @@ function addCompletion(character, quest) {
 
 function renderCompletion(character, quest, data) {
   var $completion = $timers.children("tr[data-character='" + character + "'][data-quest='" + quest + "']");
-  if (completion.length == 0) {
+  if ($completion.length == 0) {
     $completion = $("<tr data-character='"+ character +"' data-quest='"+ quest +"'></tr>");
     $completion.appendTo($timers);
   }
