@@ -14,6 +14,8 @@ function initialize() {
   });
   
   $("#AddCompletion").on("click", addCompletionEventHandler);
+  $("#RemoveCharacter").on("click", removeCharacterEventHandler);
+  $("#RemoveQuest").on("click", removeQuestEventHandler);
   $characters = $("#Characters");
   $characters.on("select2:select", selectCharacterEventHandler);
   $quests = $("#Quests");
@@ -75,7 +77,9 @@ function addCharacter(character) {
 
 function removeCharacter(character) {
   delete characters[character];
+  delete completions[character];
   saveData();
+  location.reload();
 }
 
 function addQuest(quest) {
@@ -85,7 +89,13 @@ function addQuest(quest) {
 
 function removeQuest(quest) {
   delete quests[quest];
+  for (const character in completions) {
+    if (Object.hasOwnProperty.call(completions, character)) {
+      delete completions[character][quest];
+    }
+  }
   saveData();
+  location.reload();
 }
 
 function addCompletion(character, quest) {
@@ -167,7 +177,7 @@ function selectCharacterEventHandler(e) {
 }
 
 function selectQuestEventHandler(e) {
-  var quest = e.params.data.text;
+  const quest = e.params.data.text;
   if(quests.hasOwnProperty(quest)) {
     return;
   }
@@ -186,6 +196,22 @@ function deleteCompletionTableEventHandler(e) {
   const character = $completion.data("character");
   const quest = $completion.data("quest");
   deleteCompletion(character, quest);
+}
+
+function removeCharacterEventHandler(e) {
+  const character = $characters.select2("data")[0].text;
+  if(!character || !confirm("Delete the character " + character + " and any associated timers")) {
+    return;
+  }
+  removeCharacter(character);
+}
+
+function removeQuestEventHandler(e) {
+  const quest = $quests.select2("data")[0].text;
+  if(!quest || !confirm("Delete the quest " + quest + " and any associated timers")) {
+    return;
+  }
+  removeQuest(quest);
 }
 
 $(initialize);
