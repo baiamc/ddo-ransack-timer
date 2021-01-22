@@ -165,6 +165,7 @@ function addCompletionEventHandler() {
   var quest = $quests.select2("data")[0].text;
   if(!character || !quest) {
     alert("Must select a character and a quest to mark a quest as completed");
+    return;
   }
 
   addCompletion(character, quest)
