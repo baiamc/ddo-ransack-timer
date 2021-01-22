@@ -26,6 +26,11 @@ function initialize() {
   initializeSelect2(characters, $characters);
   initializeSelect2(quests, $quests);
 
+  renderAllCompletions();
+  setInterval(renderAllCompletions,1000);
+}
+
+function renderAllCompletions() {
   for (const character in completions) {
     if (Object.hasOwnProperty.call(completions, character)) {
       for (const quest in completions[character]) {
@@ -33,7 +38,7 @@ function initialize() {
           const data = completions[character][quest];
           renderCompletion(character, quest, data);
         }
-      } 
+      }
     }
   }
 }
@@ -47,7 +52,7 @@ function initializeSelect2(data, $elem) {
 }
 
 function update() {
-
+  renderAllCompletions();
 }
 
 
@@ -123,11 +128,12 @@ function renderCompletion(character, quest, data) {
   let now = DateTime.local();
   let remaining = "Ransack Cleared!";
   if(expires > now) {
-    let remainingObj = expires.diff(now, ["days", "hours", "minutes"]);
+    let remainingObj = expires.diff(now, ["days", "hours", "minutes", "seconds"]);
     remaining = "";
     remainingObj.days && (remaining += remainingObj.days + " days ");
     remainingObj.hours && (remaining += remainingObj.hours + " hours ");
-    remainingObj.minutes && (remaining += Math.ceil(remainingObj.minutes) + " minutes ");
+    remainingObj.minutes && (remaining += remainingObj.minutes + " minutes ");
+    remainingObj.seconds && (remaining += Math.ceil(remainingObj.seconds) + " seconds ");
   }
   $completion.html(completionsTemplate({character: character, quest: quest, date: new Date(data.time).toLocaleString(), count: data.count, remaining: remaining}));
 }
