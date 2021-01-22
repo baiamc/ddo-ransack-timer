@@ -46,11 +46,13 @@ function renderAllCompletions() {
 }
 
 function initializeSelect2(data, $elem) {
+  const list = [];
   for (const item in data) {
     if (Object.hasOwnProperty.call(data, item)) {
-      $elem.append(new Option(item));
+      list.push(item);
     }
   }
+  list.sort().forEach((item) => $elem.append(new Option(item)));
 }
 
 function update() {
