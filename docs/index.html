@@ -14,9 +14,35 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-
-
   <script src="main.js"></script>
+
+  <style>
+    .completed {
+      background-color: lightgreen;
+    }
+    .ransacked {
+      background-color: lightcoral;
+    }
+    .lastrun {
+      background-color: lightyellow;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    td {
+      text-align: center;
+    }
+    .opened {
+      width: 10em;
+    }
+    .reset, .actions {
+      width: 20em
+    }
+  </style>
 </head>
 <body>
   <h1>DDO Ransack Timer</h1>
@@ -36,9 +62,10 @@
       <tr>
         <th>Character</th>
         <th>Quest</th>
-        <th>First Opened</th>
-        <th>Times Opened</th>
-        <th>Time to Reset</th>
+        <th class="opened">First Opened</th>
+        <th class="opened">Times Opened</th>
+        <th class="reset">Time to Reset</th>
+        <th class="actions">Actions</th>
       </th>
     </thead>
     <tbody></tbody>
