@@ -61,9 +61,9 @@ function update() {
 
 
 function loadData() {
-  characters = JSON.parse(localStorage.getItem("characters"));
-  quests = JSON.parse(localStorage.getItem("quests"));
-  completions = JSON.parse(localStorage.getItem("completions"));
+  characters = JSON.parse(localStorage.getItem("characters")) || {};
+  quests = JSON.parse(localStorage.getItem("quests")) || {};
+  completions = JSON.parse(localStorage.getItem("completions")) || {};
 }
 
 function saveData() {
