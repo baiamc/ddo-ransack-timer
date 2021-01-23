@@ -151,9 +151,9 @@ function renderCompletion(character, quest, data) {
   $completion.removeClass("completed ransacked lastrun");
   if(expires < now) {
     $completion.addClass("completed");
-  } else if (data.count > 8) {
+  } else if (data.count > 7) {
     $completion.addClass("ransacked");
-  } else if (data.count === 8) {
+  } else if (data.count === 7) {
     $completion.addClass("lastrun");
   }
   $completion.html(completionsTemplate({character: character, quest: quest, date: new Date(data.time).toLocaleString(), count: data.count, remaining: remaining}));
